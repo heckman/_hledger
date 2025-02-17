@@ -16,8 +16,8 @@
 # Description
 # -----------
 #
-#  Completion script for hledger 1.10 ( https://hledger.org/ )
-#  Last updated: 07.08.2018
+#  Completion script for hledger 1.41 ( https://hledger.org/ )
+#  Last updated: 2025-02-17
 #
 # ------------------------------------------------------------------------------
 # Authors
@@ -25,6 +25,11 @@
 #
 #  * Valodim ( https://github.com/Valodim )
 #  * fdw ( https://github.com/fdw )
+#
+#  Contributors
+#
+#  * Heckman ( https://github/heckman )
+#
 #
 # ------------------------------------------------------------------------------
 # Notes

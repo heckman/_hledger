@@ -182,6 +182,9 @@ while (( $#state )); do
                 args=(
                     '(--dry-run)--dry-run[just show the transactions to be imported]'
                 )
+                _arguments -C -A "-*" "$args[@]" \
+                    '*:file:_files' && ret=0
+                continue
                 ;;
             is|incomestatement)
                 args+=(

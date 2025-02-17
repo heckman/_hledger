@@ -235,54 +235,54 @@ while (( $#state )); do
         _arguments -C -A "-*" "$args[@]" \
             '*:query patterns:->query' && ret=0
         ;;
-        query)
+    query)
 
-            local -a accs keywords
-            keywords=(
-                'acct\::match account names'
-                'code\::match by transaction code'
-                'desc\::match transaction descriptions'
-                'tag\::match by tag name'
-                'depth\::match at or above depth'
-                'status\::match cleared/uncleared transactions'
-                'real\::match real/virtual transactions'
-                'empty\::match if amount is/is not zero'
-                'amt\::match transaction amount'
-                'cur\::match by currency'
-            )
-            if compset -P 'amt:'; then
-                _message 'match amount (<, <=, >, >=, add sign for non-absolute match)' && ret=0
-                continue
-            fi
-            if compset -P '(#b)(code|desc|tag|depth|status|real|empty):'; then
-                _message "'$match[1]' parameter" && ret=0
-                continue
-            fi
+        local -a accs keywords
+        keywords=(
+            'acct\::match account names'
+            'code\::match by transaction code'
+            'desc\::match transaction descriptions'
+            'tag\::match by tag name'
+            'depth\::match at or above depth'
+            'status\::match cleared/uncleared transactions'
+            'real\::match real/virtual transactions'
+            'empty\::match if amount is/is not zero'
+            'amt\::match transaction amount'
+            'cur\::match by currency'
+        )
+        if compset -P 'amt:'; then
+            _message 'match amount (<, <=, >, >=, add sign for non-absolute match)' && ret=0
+            continue
+        fi
+        if compset -P '(#b)(code|desc|tag|depth|status|real|empty):'; then
+            _message "'$match[1]' parameter" && ret=0
+            continue
+        fi
 
-            accs=( ${(f)"$(_call_program hledger hledger accounts $PREFIX 2>/dev/null)"} )
-            if (( $? )); then
-                _message "error fetching accounts from hledger"
-            fi
+        accs=( ${(f)"$(_call_program hledger hledger accounts $PREFIX 2>/dev/null)"} )
+        if (( $? )); then
+            _message "error fetching accounts from hledger"
+        fi
 
-            # decided against partial matching here. these lines can
-            # be uncommented to complete subaccounts hierarchically
-            # (add -S '' -q to the compadd below, too)
-            # if compset -P '(#b)(*):'; then
-                # accs=( ${(M)accs:#$match[1]:*} )
-                # accs=( ${accs#$IPREFIX} )
-            # fi
-            # accs=( ${accs%%:*} )
+        # decided against partial matching here. these lines can
+        # be uncommented to complete subaccounts hierarchically
+        # (add -S '' -q to the compadd below, too)
+        # if compset -P '(#b)(*):'; then
+            # accs=( ${(M)accs:#$match[1]:*} )
+            # accs=( ${accs#$IPREFIX} )
+        # fi
+        # accs=( ${accs%%:*} )
 
-            _wanted accounts expl "accounts" compadd -a accs && ret=0
-            _describe "matcher keywords" keywords -S '' && ret=0
+        _wanted accounts expl "accounts" compadd -a accs && ret=0
+        _describe "matcher keywords" keywords -S '' && ret=0
 
-            # not is special, it doesn't need the -S ''
-            keywords=(
-                'not:negate expression'
-            )
-            _describe "matcher keywords" keywords && ret=0
+        # not is special, it doesn't need the -S ''
+        keywords=(
+            'not:negate expression'
+        )
+        _describe "matcher keywords" keywords && ret=0
 
-        ;;
+    ;;
     esac
 done
 

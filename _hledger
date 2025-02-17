@@ -138,7 +138,7 @@ while (( $#state )); do
                     '(--no-elide)--no-elide[tree mode, do not squash boring parent accounts]'
                     '(--format)--format=[in tree mode, use this custom line format]:custom line format'
                     '(-O --output-format)'{-O,--output-format}='[select the output format from txt, csv, html]:format'
-                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file'
+                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file:_files'
                     '(--pretty-tables)--pretty-tables[use unicode to display prettier tables]'
                     '(--sort-amount)--sort-amount[sort by amount instead of account code/name]'
                     '(--invert)--invert[display all amounts with reversed sign]'
@@ -208,7 +208,7 @@ while (( $#state )); do
                     '(--new)--new[show only newer-dated transactions added in each file since last run]'
                     '(-x --explicit)'{-x,--explicit}'[show all amounts explicitly]'
                     '(-O --output-format)'{-O,--output-format}='[select the output format from txt, csv, html]:format'
-                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file'
+                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file:_files'
                 )
                 ;;
             register|reg)
@@ -219,12 +219,12 @@ while (( $#state )); do
                       '(-r --related)'{-r,--related}'[show postings'\'' siblings instead]'
                       '(-w --width)'{-w,--width}'=[set output width to 120, or N]:width (default 80)'
                     '(-O --output-format)'{-O,--output-format}='[select the output format from txt, csv, html]:format'
-                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file'
+                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file:_files'
                 )
                 ;;
             stats)
                 args=(
-                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file'
+                    '(-o --output-file)'{-o,--output-file}'=[write output to file]:file:_files'
                 )
                 ;;
             # fallback to _default
